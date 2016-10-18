@@ -16,6 +16,7 @@ import (
 func main() {
 	listen := flag.String("listen", ":8080", "address:port to listen on.")
 	bucket := flag.String("bucket", "", "S3 bucket name")
+	prefix := flag.String("prefix", "", "S3 prefix")
 	logRequests := flag.Bool("log-requests", true, "log HTTP requests")
 	region := flag.String("region", "us-east-1", "AWS S3 Region")
 	s3Endpoint := flag.String("s3-endpoint", "", "alternate http://address for accessing s3 (for configuring with minio.io)")
@@ -42,6 +43,7 @@ func main() {
 
 	var h http.Handler
 	h = &Proxy{
+		Prefix: *prefix,
 		Bucket: *bucket,
 		Svc:    svc,
 	}
