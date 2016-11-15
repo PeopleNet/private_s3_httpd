@@ -46,7 +46,7 @@ func (p *Proxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 		case "NoSuchKey":
 			http.Error(rw, "Page Not Found", 404)
 			return
-		case "304NotModified":
+		case "NotModified":
 			is304 = true
 			// continue so other headers get set appropriately
 		default:
