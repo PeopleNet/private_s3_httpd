@@ -142,10 +142,10 @@
 			"revisionTime": "2016-03-01T22:14:50Z"
 		},
 		{
-			"checksumSHA1": "wu3jCY1Ny2tPdsj36W6YH1Bm2No=",
+			"checksumSHA1": "oe2I31TYOGBkTCca2/PwttmEtnY=",
 			"path": "github.com/gorilla/handlers",
-			"revision": "e1b2144f2167de0e1042d1d35e5cba5119d4fb5d",
-			"revisionTime": "2016-10-28T13:32:15Z"
+			"revision": "8066bb491b4ea129dd71b306aab4c52868503404",
+			"revisionTime": "2015-06-12T23:10:28Z"
 		},
 		{
 			"checksumSHA1": "0ZrwvB6KoGPj2PoDNSEJwxQ6Mog=",
