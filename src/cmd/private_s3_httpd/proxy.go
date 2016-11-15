@@ -25,7 +25,7 @@ func (p *Proxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	if key == "/" {
 		key = "/index.html"
 	}
-	key = strings.Join([]string{p.Prefix, key}, "/")
+	key = strings.Join([]string{p.Prefix, key}, "")
 	input := &s3.GetObjectInput{
 		Bucket: aws.String(p.Bucket),
 		Key:    aws.String(key),
@@ -46,11 +46,11 @@ func (p *Proxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 		case "NoSuchKey":
 			http.Error(rw, "Page Not Found", 404)
 			return
-		case "NotModified":
+		case "304NotModified":
 			is304 = true
 			// continue so other headers get set appropriately
 		default:
-			log.Printf("Error: %v %v", awsErr.Code(), awsErr.Message())
+			log.Printf("Error: %v %v %v", *input.Key, awsErr.Code(), awsErr.Message())
 			http.Error(rw, "Internal Error", 500)
 			return
 		}
@@ -83,6 +83,7 @@ func (p *Proxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 
 	if is304 {
 		rw.WriteHeader(304)
+		return
 	}
 
 	io.Copy(rw, resp.Body)
